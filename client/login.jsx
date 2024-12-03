@@ -39,27 +39,29 @@ const handleSignup = (e) => {
         return false;
     }
 
-    helper.sendPost(e.target.action, {username, pass, pass2});
+    helper.sendPost(e.target.action, { username, pass, pass2 });
     return false;
 }
 
 //for login
 const LoginWindow = (props) => {
-    return(
+    return (
         <form id="loginForm"
-        name="loginForm"
-        onSubmit={handleLogin}
-        action="/login"
-        method="POST"
-        className="mainForm"
+            name="loginForm"
+            onSubmit={handleLogin}
+            action="/login"
+            method="POST"
+            className="mainForm"
         >
-            <a href="/login">
-                <img id="pika" src="/assets/img/pikachu.png" alt="pikachu" />
-            </a>
-            
+
+            <img id="pika" src="/assets/img/pikachu.png" alt="pikachu" />
             <input id="user" type="text" name="username" placeholder="username" />
             <input id="pass" type="password" name="pass" placeholder="password" />
             <input className="formSubmit" type="submit" value="Sign in" />
+            <div id="message" class='hidden'>
+                <h3><span id="errorMessage"></span></h3>
+            </div>
+
         </form>
     );
 
@@ -67,21 +69,24 @@ const LoginWindow = (props) => {
 
 //for signup
 const SignupWindow = (props) => {
-    return(
+    return (
         <form id="signupForm"
-        name="signupForm"
-        onSubmit={handleSignup}
-        action="/signup"
-        method="POST"
-        className="mainForm"
+            name="signupForm"
+            onSubmit={handleSignup}
+            action="/signup"
+            method="POST"
+            className="mainForm"
         >
-            <label htmlFor="username">Username:</label>
+
+
+            <img id="pika2" src="/assets/img/pikachu-2.png" alt="pikachu" />
             <input id="user" type="text" name="username" placeholder="username" />
-            <label htmlFor="pass">Password:</label>
             <input id="pass" type="password" name="pass" placeholder="password" />
-            <label htmlFor="pass">Password:</label>
             <input id="pass2" type="password" name="pass2" placeholder="retype password" />
             <input className="formSubmit" type="submit" value="Sign up" />
+            <div id="message" class='hidden'>
+                <h3><span id="errorMessage"></span></h3>
+            </div>
         </form>
     );
 
@@ -96,17 +101,17 @@ const init = () => {
 
     loginButton.addEventListener('click', (e) => {
         e.preventDefault();
-        root.render( <LoginWindow />);
+        root.render(<LoginWindow />);
         return false;
     });
 
     signupButton.addEventListener('click', (e) => {
         e.preventDefault();
-        root.render( <SignupWindow />);
+        root.render(<SignupWindow />);
         return false;
     });
 
-    root.render( <LoginWindow />)
+    root.render(<LoginWindow />)
 };
 
 window.onload = init;

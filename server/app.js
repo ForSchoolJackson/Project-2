@@ -19,7 +19,7 @@ const port = process.env.PORT || process.env.NODE_PORT || 3000;
 const dbURI = process.env.MONGODB_URI;
 mongoose.connect(dbURI).catch((err) => {
   if (err) {
-    console.log('COuld not connect to database');
+    console.log('Could not connect to database');
     throw err;
   }
 });

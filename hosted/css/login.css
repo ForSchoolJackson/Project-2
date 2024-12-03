@@ -61,9 +61,16 @@ body {
     justify-content: space-between;
 }
 
-/* pika image */
+/* pika images */
 #pika {
     margin-left: 100px;
+    padding-bottom: 30px;
+    width: 150px;  
+    height: auto;
+}
+
+#pika2 {
+    margin-left: 80px;
     padding-bottom: 30px;
     width: 150px;  
     height: auto;
@@ -118,4 +125,11 @@ form.mainForm input[type="submit"] {
 
 form.mainForm input[type="submit"]:hover {
     background-color: #45a049;
+}
+
+/* error */
+#errorMessage {
+    color: red;  
+    font-size: 16px; 
+    font-weight: bold; 
 }
