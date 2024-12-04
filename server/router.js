@@ -27,6 +27,9 @@ const router = (app) => {
   // app.post('/home', mid.requiresLogin, controllers.Pokemon.makePokemon);
 
   // app.delete('/Pokemon/:id', mid.requiresLogin, controllers.Pokemon.deletePokemon);
+
+  // 404 page
+  app.get('/*', controllers.Account.errPage);
 };
 
 // exports

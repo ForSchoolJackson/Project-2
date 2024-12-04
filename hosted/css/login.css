@@ -65,14 +65,14 @@ body {
 #pika {
     margin-left: 100px;
     padding-bottom: 30px;
-    width: 150px;  
+    width: 150px;
     height: auto;
 }
 
 #pika2 {
     margin-left: 80px;
     padding-bottom: 30px;
-    width: 150px;  
+    width: 150px;
     height: auto;
 }
 
@@ -83,7 +83,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 80vh;
-    width: 100%; 
+    width: 100%;
     gap: 20px;
 }
 
@@ -129,7 +129,45 @@ form.mainForm input[type="submit"]:hover {
 
 /* error */
 #errorMessage {
-    color: red;  
-    font-size: 16px; 
-    font-weight: bold; 
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* 404 page */
+.errPage {
+    padding-top: 100px;
+    text-align: center;
+    font-size: 2.5vw;
+}
+
+.errpage h2 {
+    font-size: 25vw;
+}
+
+.errpage p{
+    margin-top: -30px;
+}
+
+/* 404 page image */
+.errpage img{
+    height: 20vw;
+}
+
+/* 404 page button*/
+#backSubmit {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 2vw;
+    width: 9vw;
+    margin-top: 20px;
+}
+
+#backSubmit:hover {
+    background-color: #45a049;
+
 }

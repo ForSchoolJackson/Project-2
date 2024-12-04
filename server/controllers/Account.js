@@ -5,6 +5,7 @@ const { Account } = models;
 
 // pages
 const loginPage = (req, res) => res.render('login');
+const errPage = async (req, res) => res.render('404');
 
 // logout
 const logout = (req, res) => {
@@ -66,6 +67,7 @@ const signup = async (req, res) => {
 // exports
 module.exports = {
   loginPage,
+  errPage,
   login,
   logout,
   signup,
