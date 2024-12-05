@@ -9,6 +9,24 @@ const { Pokemon } = models;
 // profile page
 const profilePage = async (req, res) => res.render('app');
 
+// profile info
+const getProfile = async (req, res) => {
+  try {
+    const user = req.session.account;
+    // count the number of documents
+    // https://www.mongodb.com/docs/manual/reference/method/db.collection.countDocuments/
+    const pokemonNum = await Pokemon.countDocuments({ owner: user._id });
+
+    return res.status(200).json({
+      user,
+      pokemonNum,
+    });
+  } catch (err) {
+    console.error('Error fetching user info:', err);
+    return res.status(500).json({ error: 'An error occurred while fetching user info.' });
+  }
+};
+
 // add pokemon
 const addPokemon = async (req, res) => {
   // chack all feilds
@@ -85,6 +103,7 @@ const deletePokemon = async (req, res) => {
 // exports
 module.exports = {
   profilePage,
+  getProfile,
   getPokemon,
   addPokemon,
   deletePokemon,

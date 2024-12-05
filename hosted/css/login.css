@@ -1,11 +1,12 @@
-/* Reset some default styles */
+/*https://www.w3schools.com/bootstrap/bootstrap_ref_css_helpers.asp*/
+/* RESET*/
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* navbar */
+/* NAVBAR */
 #logo {
     height: 45px;
     width: auto;
@@ -59,7 +60,11 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
 }
+
+/* LOGIN/SETUP PAGE */
 
 /* pika images */
 #pika {
@@ -134,7 +139,7 @@ form.mainForm input[type="submit"]:hover {
     font-weight: bold;
 }
 
-/* 404 page */
+/* 404 PAGE*/
 .errPage {
     padding-top: 100px;
     text-align: center;

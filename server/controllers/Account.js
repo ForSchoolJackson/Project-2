@@ -29,7 +29,7 @@ const login = (req, res) => {
 
     req.session.account = Account.toAPI(account);
 
-    return res.json({ redirect: '/collector' });
+    return res.json({ redirect: '/profile' });
   });
 };
 
@@ -52,7 +52,7 @@ const signup = async (req, res) => {
     const newAccount = new Account({ username, password: hash });
     await newAccount.save();
     req.session.account = Account.toAPI(newAccount);
-    return res.json({ redirect: '/collector' });
+    return res.json({ redirect: '/profile' });
   } catch (err) {
     console.log(err);
     if (err.code === 11000) {
@@ -61,8 +61,6 @@ const signup = async (req, res) => {
     return res.status(500).json({ error: 'An error occurred!' });
   }
 };
-
-// password change
 
 // exports
 module.exports = {

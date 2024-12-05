@@ -21,12 +21,15 @@ const router = (app) => {
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
 
   // main page
-  app.get('/collector', mid.requiresLogin, middleLogger, controllers.Pokemon.profilePage);
+  app.get('/profile', mid.requiresLogin, middleLogger, controllers.Pokemon.profilePage);
 
-  // app.get('/getPokemon', mid.requiresLogin, controllers.Pokemon.getPokemon);
+  // get
+  app.get('/getPokemon', mid.requiresLogin, controllers.Pokemon.getPokemon);
+  app.get('/getProfile', mid.requiresLogin, controllers.Pokemon.getProfile);
   // app.post('/home', mid.requiresLogin, controllers.Pokemon.makePokemon);
 
-  // app.delete('/Pokemon/:id', mid.requiresLogin, controllers.Pokemon.deletePokemon);
+  // delete
+  app.delete('/Pokemon/:id', mid.requiresLogin, controllers.Pokemon.deletePokemon);
 
   // 404 page
   app.get('/*', controllers.Account.errPage);
