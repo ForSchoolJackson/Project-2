@@ -53,6 +53,11 @@ AccountSchema.statics.authenticate = async (username, password, callback) => {
   }
 };
 
+// compare password
+AccountSchema.methods.comparePassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
+
 // exports
 AccountModel = mongoose.model('Account', AccountSchema);
 module.exports = AccountModel;

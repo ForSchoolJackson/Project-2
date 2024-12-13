@@ -13,6 +13,11 @@ const logout = (req, res) => {
   res.redirect('/');
 };
 
+// pass change
+const changePasswordPage = (req, res) => {
+  res.render('changePassword');
+};
+
 // login
 const login = (req, res) => {
   const username = `${req.body.username}`;
@@ -62,6 +67,31 @@ const signup = async (req, res) => {
   }
 };
 
+// Function to handle password change logic
+const changePassword = async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+
+  try {
+    // Check if the current password is correct
+    const account = await Account.findById(req.session.account._id);
+    const isValidPassword = await account.comparePassword(currentPassword);
+
+    if (!isValidPassword) {
+      return res.status(401).json({ error: 'Incorrect current password!' });
+    }
+
+    // Update the password
+    const hash = await Account.generateHash(newPassword);
+    account.password = hash;
+    await account.save();
+
+    return res.json({ redirect: '/profile' });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'An error occurred while updating password' });
+  }
+};
+
 // exports
 module.exports = {
   loginPage,
@@ -69,4 +99,6 @@ module.exports = {
   login,
   logout,
   signup,
+  changePasswordPage,
+  changePassword,
 };

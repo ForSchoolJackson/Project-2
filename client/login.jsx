@@ -77,8 +77,6 @@ const SignupWindow = (props) => {
             method="POST"
             className="mainForm"
         >
-
-
             <img id="pika2" src="/assets/img/pikachu-2.png" alt="pikachu" />
             <input id="user" type="text" name="username" placeholder="username" />
             <input id="pass" type="password" name="pass" placeholder="password" />
@@ -91,6 +89,7 @@ const SignupWindow = (props) => {
     );
 
 };
+  
 
 //initialize
 const init = () => {

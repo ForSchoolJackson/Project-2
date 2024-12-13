@@ -19,10 +19,6 @@ const Profile = () => {
             setId(data.user._id);
             setPokemonNum(data.pokemonNum);
 
-            console.log(data);
-
-            console.log(pokemonNum)
-
         };
         loadUserData();
     }, []);

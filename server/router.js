@@ -13,10 +13,9 @@ const router = (app) => {
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 
-  // posts
+  // posts for login/signup
   app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
   app.post('/signup', mid.requiresSecure, mid.requiresLogout, controllers.Account.signup);
-
   // logout
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
 
@@ -26,7 +25,9 @@ const router = (app) => {
   // get
   app.get('/getPokemon', mid.requiresLogin, controllers.Pokemon.getPokemon);
   app.get('/getProfile', mid.requiresLogin, controllers.Pokemon.getProfile);
-  // app.post('/home', mid.requiresLogin, controllers.Pokemon.makePokemon);
+  app.get('/passChange', mid.requiresLogin, controllers.Account.changePasswordPage);
+
+  app.post('/passChange', mid.requiresSecure, mid.requiresLogin, controllers.Account.changePassword);
 
   // delete
   app.delete('/Pokemon/:id', mid.requiresLogin, controllers.Pokemon.deletePokemon);
