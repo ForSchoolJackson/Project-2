@@ -1,15 +1,27 @@
 // imports
+const fs = require('fs');
+const path = require('path');
 const { Types } = require('mongoose');
-
-const { ObjectId } = Types;
 const models = require('../models');
 
+const { ObjectId } = Types;
 const { Pokemon } = models;
+
+const pokemonPath = path.resolve(__dirname, '../data/pokedex.json');
+const jsonString = fs.readFileSync(pokemonPath, 'utf-8');
+let data = [];
+
+// parse the json data
+try {
+  data = JSON.parse(jsonString);
+} catch (err) {
+  console.log('Unknown eorror parsing data');
+}
 
 // profile page
 const profilePage = async (req, res) => res.render('app');
 
-//search page
+// search page
 const searchPage = async (req, res) => res.render('search');
 
 // profile info
@@ -103,31 +115,19 @@ const deletePokemon = async (req, res) => {
   }
 };
 
-//FOR SEARCH
-//CODE TAKEN FROM MY PROJECT 1
-const fs = require('fs');
-const path = require('path');
+// FOR SEARCH
+// CODE TAKEN FROM MY PROJECT 1
 
-const pokemonPath = path.resolve(__dirname, '../data/pokedex.json');
-const jsonString = fs.readFileSync(pokemonPath, 'utf-8');
-let data = [];
-
-//parse the json data
-try {
-  data = JSON.parse(jsonString); 
-} catch (err) {
-}
-
-//get pokemon from json
+// get pokemon from json
 const getAllPokemon = (req, res) => {
   try {
     if (data.length === 0) {
       return res.status(404).json({ error: 'No Pokémon data found.' });
     }
-    res.status(200).json(data)
+    return res.status(200).json(data);
   } catch (err) {
     console.error('error:', err);
-    res.status(500).json({ error: 'error getting data' });
+    return res.status(500).json({ error: 'error getting data' });
   }
 };
 

@@ -30,7 +30,7 @@ const router = (app) => {
 
   app.post('/passChange', mid.requiresSecure, mid.requiresLogin, controllers.Account.changePassword);
 
-  //get the pokemon data
+  // get the pokemon data
   app.get('/all-pokemon', controllers.Pokemon.getAllPokemon);
   app.get('/pokemon', controllers.Pokemon.getPokemonByName);
 
