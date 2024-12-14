@@ -8,6 +8,10 @@ Moved Read me to DOC
 help with CSS
 -https://www.w3schools.com/css/default.asp
 
+help with allowing images
+https://helmetjs.github.io/
+
+
 <h2>Images</h2>
 
 Pokeball image

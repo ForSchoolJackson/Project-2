@@ -28,12 +28,28 @@ const redisClient = redis.createClient({
   url: process.env.REDISCLOUD_URL,
 });
 
+// options so the images can be taken from webpage
+//https://helmetjs.github.io/
+const helmetOptions = {
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      imgSrc: ["'self'", "data:", "https://www.serebii.net", "http://www.serebii.net"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      fontSrc: ["'self'"],
+      connectSrc: ["'self'"]
+    }
+  }
+};
+
 redisClient.on('error', (err) => console.log('Redis Client Error', err));
 
 redisClient.connect().then(() => {
   const app = express();
 
-  app.use(helmet());
+  //app.use(setupCSP);
+  app.use(helmet(helmetOptions));
   app.use('/assets', express.static(path.resolve(`${__dirname}/../hosted/`)));
   app.use(favicon(`${__dirname}/../hosted/img/favicon.png`));
   app.use(compression());
