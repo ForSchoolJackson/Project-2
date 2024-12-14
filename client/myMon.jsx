@@ -25,7 +25,7 @@ const PokemonList = (props) => {
     // if no pokemon yet
     if (pokemon.length === 0) {
         return (
-            <div className="pokemonList">
+            <div className="noPokemonList">
                 <h3 className="emptyPokemon">No Pokemon Yet!</h3>
                 <button onClick={goSearch} className="btnFind">
                     Find Some
@@ -35,15 +35,23 @@ const PokemonList = (props) => {
     };
 
     const pokemonNodes = pokemon.map(mon => {
+        //for type array
+        const types = Array.isArray(mon.type) ? mon.type.join(', ') : 'Unknown Type';
         return (
             <div key={mon.id} className="pokemon">
-                <button
-                    className="deletepokemonSubmit"
-                    onClick={() => helper.deletePokemon(mon._id, props.triggerReload)}>
-                    Delete
-                </button>
-                <div className="info">
-                    <h3 className="pokemonName">Name: {mon.name}</h3>
+                <div class="image">
+                    <img src={mon.img} alt={mon.name} className="pokemonImg" />
+                </div>
+                <div class="text">
+                    <h2 className="pokemonName">{mon.name}</h2>
+                    <p className="pokemonType">{types}</p>
+                    <p className="pokemonHeight">Height: {mon.height}</p>
+                    <p className="pokemonWeight">Weight: {mon.weight}</p>
+                    <button
+                        className="deletepokemonSubmit"
+                        onClick={() => helper.deletePokemon(mon._id, props.triggerReload)}>
+                        Delete
+                    </button>
                 </div>
             </div>
         );
@@ -56,7 +64,7 @@ const PokemonList = (props) => {
     );
 };
 
-const ProfilePage = () => {
+const ListPage = () => {
     const [reloadPokemon, setReloadPokemon] = useState(false);
 
     return (
@@ -68,7 +76,7 @@ const ProfilePage = () => {
 
 const init = () => {
     const root = createRoot(document.getElementById('app'));
-    root.render(<ProfilePage />)
+    root.render(<ListPage />)
 };
 
 window.onload = init;

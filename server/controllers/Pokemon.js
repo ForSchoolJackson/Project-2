@@ -92,7 +92,7 @@ const addPokemon = async (req, res) => {
 const getPokemon = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };
-    const docs = await Pokemon.find(query).select('name').lean().exec();
+    const docs = await Pokemon.find(query).lean().exec();
 
     return res.json({ pokemon: docs });
   } catch (err) {

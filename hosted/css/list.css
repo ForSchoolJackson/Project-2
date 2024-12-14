@@ -1,3 +1,4 @@
+
 /*https://www.w3schools.com/bootstrap/bootstrap_ref_css_helpers.asp*/
 /* RESET*/
 * {
@@ -69,64 +70,70 @@ body {
     overflow: hidden;
 }
 
-/* PROFILE PAGE*/
-#profile {
-    flex: 1;
-    width: 70vw;
+/* pokemon page */
+.pokemonList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    overflow-y: auto;
+    max-height: 80vh;
+    padding: 20px;
+    gap: 20px;
+    overflow-y: auto;
+    max-height: 80vh;
+    width: 100%;
+}
+
+.pokemon {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
     max-width: 600px;
-    height: 70vh;
-    min-height: 400px;
-    text-align: center;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 20px;
+
+}
+
+.image {
+    flex: 0 0 50%;
+    margin-right: 20px;
+}
+
+.text {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pokemon img {
+    width: 70%;
+    height: auto;
+}
+
+.noPokemonList {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
     flex-direction: column;
-    /* wrap words */
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-    margin: 10px;
+    align-items: center;
+
 }
 
-#profile h2,
-#profile h3,
-#profile p {
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-    color: #45a049;
-}
-
-#profile h2 {
-    margin-top: 2rem;
-    font-size: 2rem;
-    color: #45a049;
-}
-
-/* picture */
-.profilePictureContainer {
-    display: flex;
-    justify-content: center;
+.emptyPokemon {
+    color: #f39c12;
+    font-size: 1.5em;
     margin-bottom: 20px;
 }
 
-.profilePicture {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    background-color: white;
-    border: 5px solid #4CAF50;
-}
-
-.profile h2,
-.profile h3 {
-    text-align: center;
-}
-
-
-/* pokemon page */
 #pokemon {
     flex: 1;
     width: 70vw;
@@ -135,11 +142,18 @@ body {
     min-height: 400px;
     text-align: center;
     justify-content: center;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+}
+
+#pokemon h2 {
+    margin-top: 2rem;
+    color: #45a049;
+    font-size: 1.2rem;
+}
+
+#pokemon p {
+    color: #45a049;
 }
 
 #pokemon h3 {

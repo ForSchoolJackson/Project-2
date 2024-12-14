@@ -32,6 +32,11 @@ nav:nth-child(1) {
     float: left;
 }
 
+/* current page */
+#current {
+    color: #2a848a;
+}
+
 .navlink a,
 .navlink a:link,
 .navlink a:visited,
@@ -165,9 +170,4 @@ p {
 #errorMessage {
     color: red;
     font-weight: bold;
-}
-
-/* current page */
-#current {
-    color: #2a848a;
 }
