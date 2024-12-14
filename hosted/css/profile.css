@@ -98,12 +98,33 @@ body {
     font-size: 2rem;
 }
 
+/* picture */
+.profilePictureContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.profilePicture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; 
+    object-fit: cover;  
+    background-color: white; 
+    border: 5px solid #4CAF50;
+}
+
+.profile h2, .profile h3 {
+    text-align: center;
+}
+
+
 #pokemon {
     flex: 1;
     width: 40vw;
     height: 600px;
     text-align: center;
-    background-color: #d0d2d0;
+    background-color: #f3f3f3;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);

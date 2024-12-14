@@ -9,7 +9,7 @@ const middleLogger = (req, res, next) => {
 
 // paths
 const router = (app) => {
-  // login page
+  // get login pages
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 
@@ -19,8 +19,9 @@ const router = (app) => {
   // logout
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
 
-  // main page
+  // main pages
   app.get('/profile', mid.requiresLogin, middleLogger, controllers.Pokemon.profilePage);
+  app.get('/search', mid.requiresLogin, middleLogger, controllers.Pokemon.searchPage);
 
   // get
   app.get('/getPokemon', mid.requiresLogin, controllers.Pokemon.getPokemon);
@@ -28,6 +29,10 @@ const router = (app) => {
   app.get('/passChange', mid.requiresLogin, controllers.Account.changePasswordPage);
 
   app.post('/passChange', mid.requiresSecure, mid.requiresLogin, controllers.Account.changePassword);
+
+  //get the pokemon data
+  app.get('/all-pokemon', controllers.Pokemon.getAllPokemon);
+  app.get('/pokemon', controllers.Pokemon.getPokemonByName);
 
   // delete
   app.delete('/Pokemon/:id', mid.requiresLogin, controllers.Pokemon.deletePokemon);

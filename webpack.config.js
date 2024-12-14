@@ -5,6 +5,7 @@ module.exports = {
         app: './client/collector.jsx',
         login: '/client/login.jsx',
         password: '/client/passChange.jsx',
+        search: '/client/search.jsx',
     },
     module: {
         rules: [

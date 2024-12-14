@@ -9,6 +9,7 @@ const Profile = () => {
     const [username, setUsername] = useState(null);
     const [id, setId] = useState(null);
     const [pokemonNum, setPokemonNum] = useState(null);
+    const [profilePicture, setProfilePicture] = useState(null);
 
     useEffect(() => {
         const loadUserData = async () => {
@@ -18,6 +19,7 @@ const Profile = () => {
             setUsername(data.user.username);
             setId(data.user._id);
             setPokemonNum(data.pokemonNum);
+            setProfilePicture(data.user.profilePicture);
 
         };
         loadUserData();
@@ -29,27 +31,27 @@ const Profile = () => {
         window.location.replace('/passChange');
     }
 
-    const changeProfile = () => {
-        window.location.replace('/picChange');
-    }
-
     //return different response for number of pokemon owned
     let numResponse;
-    if(pokemonNum > 0){
-        numResponse = `You own ${pokemonNum} pokemon!`
-    }else{
-        numResponse = `So lonely...`
+    if (pokemonNum > 0) {
+        numResponse = `Owns ${pokemonNum} pokemon!`
+    } else {
+        numResponse = `No pokemon in collection`
     }
 
     // return HTML
-    return(
+    return (
         <div className="profile">
+            <div className="profilePictureContainer">
+                <img
+                    src={profilePicture || '/assets/img/pikachu.png'}
+                    alt="Profile Picture"
+                    className="profilePicture"
+                />
+            </div>
             <h2>{username}</h2>
             <h3>{id}</h3>
             <p>{numResponse}</p>
-            <button onClick={changeProfile} className="btnPicChange">
-                Change Picture
-            </button>
             <button onClick={changePassword} className="btnChange">
                 Change Password
             </button>
@@ -82,8 +84,8 @@ const PokemonList = (props) => {
             <div className="pokemonList">
                 <h3 className="emptyPokemon">No Pokemon Yet!</h3>
                 <button onClick={goSearch} className="btnFind">
-                Find Some
-            </button>
+                    Find Some
+                </button>
             </div>
         );
     };

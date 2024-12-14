@@ -9,6 +9,9 @@ const { Pokemon } = models;
 // profile page
 const profilePage = async (req, res) => res.render('app');
 
+//search page
+const searchPage = async (req, res) => res.render('search');
+
 // profile info
 const getProfile = async (req, res) => {
   try {
@@ -70,7 +73,7 @@ const addPokemon = async (req, res) => {
 const getPokemon = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };
-    const docs = await Pokemon.find(query).select('name age food').lean().exec();
+    const docs = await Pokemon.find(query).select('name').lean().exec();
 
     return res.json({ pokemon: docs });
   } catch (err) {
@@ -100,11 +103,64 @@ const deletePokemon = async (req, res) => {
   }
 };
 
+//FOR SEARCH
+//CODE TAKEN FROM MY PROJECT 1
+const fs = require('fs');
+const path = require('path');
+
+const pokemonPath = path.resolve(__dirname, '../data/pokedex.json');
+const jsonString = fs.readFileSync(pokemonPath, 'utf-8');
+let data = [];
+
+//parse the json data
+try {
+  data = JSON.parse(jsonString); 
+} catch (err) {
+}
+
+//get pokemon from json
+const getAllPokemon = (req, res) => {
+  try {
+    if (data.length === 0) {
+      return res.status(404).json({ error: 'No Pokémon data found.' });
+    }
+    res.status(200).json(data)
+  } catch (err) {
+    console.error('error:', err);
+    res.status(500).json({ error: 'error getting data' });
+  }
+};
+
+// get pokemon by the name
+const getPokemonByName = async (req, res) => {
+  const { name } = req.query;
+
+  if (!name) {
+    return res.status(400).json({ error: 'No name provided to search.' });
+  }
+
+  try {
+    const foundPokemon = data.find((mon) => mon.name.toLowerCase() === name.toLowerCase());
+
+    if (!foundPokemon) {
+      return res.status(404).json({ error: `No Pokémon found with the name: ${name}` });
+    }
+
+    return res.status(200).json(foundPokemon);
+  } catch (err) {
+    console.error('Error:', err);
+    return res.status(500).json({ error: 'Error finding Pokémon.' });
+  }
+};
+
 // exports
 module.exports = {
   profilePage,
+  searchPage,
   getProfile,
   getPokemon,
   addPokemon,
   deletePokemon,
+  getAllPokemon,
+  getPokemonByName,
 };
