@@ -20,7 +20,8 @@ try {
 
 // profile page
 const profilePage = async (req, res) => res.render('app');
-
+// pokemon list page
+const myListPage = async (req, res) => res.render('pokemon');
 // search page
 const searchPage = async (req, res) => res.render('search');
 
@@ -163,6 +164,7 @@ const getPokemonByName = async (req, res) => {
 module.exports = {
   profilePage,
   searchPage,
+  myListPage,
   getProfile,
   getPokemon,
   addPokemon,

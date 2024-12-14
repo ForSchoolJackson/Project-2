@@ -2,10 +2,11 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        app: './client/collector.jsx',
+        app: './client/profile.jsx',
         login: '/client/login.jsx',
         password: '/client/passChange.jsx',
         search: '/client/search.jsx',
+        pokemon: '/client/myMon.jsx',
     },
     module: {
         rules: [

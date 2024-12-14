@@ -22,6 +22,7 @@ const router = (app) => {
 
   // gt main pages
   app.get('/profile', mid.requiresLogin, middleLogger, controllers.Pokemon.profilePage);
+  app.get('/myList', mid.requiresLogin, middleLogger, controllers.Pokemon.myListPage);
   app.get('/search', mid.requiresLogin, middleLogger, controllers.Pokemon.searchPage);
 
   // get

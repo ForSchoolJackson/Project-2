@@ -18,6 +18,7 @@ nav {
     width: 100%;
     height: 50px;
     background-color: #24640a;
+    margin-bottom: 10vh;
 }
 
 nav:nth-child(1) {
@@ -58,27 +59,25 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
+    justify-content: flex-start;
     overflow: hidden;
 }
 
 /* PROFILE PAGE*/
-#all {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    margin-top: -100px;
-}
-
 #profile {
     flex: 1;
-    width: 40vw;
-    height: 600px;
+    width: 70vw;
+    max-width: 600px;
+    height: 70vh;
+    min-height: 400px;
     text-align: center;
     justify-content: center;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
     /* wrap words */
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -91,11 +90,13 @@ body {
 #profile p {
     margin-bottom: 15px;
     font-size: 1.1rem;
+    color: #45a049;
 }
 
 #profile h2 {
     margin-top: 2rem;
     font-size: 2rem;
+    color: #45a049;
 }
 
 /* picture */
@@ -108,26 +109,32 @@ body {
 .profilePicture {
     width: 150px;
     height: 150px;
-    border-radius: 50%; 
-    object-fit: cover;  
-    background-color: white; 
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: white;
     border: 5px solid #4CAF50;
 }
 
-.profile h2, .profile h3 {
+.profile h2,
+.profile h3 {
     text-align: center;
 }
 
 
+/* pokemon page */
 #pokemon {
     flex: 1;
-    width: 40vw;
-    height: 600px;
+    width: 70vw;
+    max-width: 600px;
+    height: 70vh;
+    min-height: 400px;
     text-align: center;
-    background-color: #f3f3f3;
+    justify-content: center;
+    background-color: white;
     border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
 }
 
 #pokemon h3 {
@@ -138,7 +145,7 @@ body {
 
 
 /* buttons */
-.btnChange, .btnPicChange,  .btnFind{
+button {
     margin-top: 20px;
     background-color: #4CAF50;
     color: white;
@@ -146,20 +153,28 @@ body {
     border-radius: 5px;
     cursor: pointer;
     margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.btnChange:hover, .btnPicChange:hover, .btnFind:hover {
+.btnChange:hover,
+.btnPicChange:hover,
+.btnFind:hover {
     background-color: #45a049;
 }
 
-.btnChange{
+.btnChange {
     padding: 10px 10px;
 }
 
-.btnPicChange{
+.btnPicChange {
     padding: 10px 20px;
 }
 
-.btnFind{
+.btnFind {
     padding: 10px 30px;
+}
+
+/* current page */
+#current {
+    color: #2a848a;
 }
