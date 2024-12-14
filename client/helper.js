@@ -38,8 +38,30 @@ const sendPost = async (url, data, handler) => {
     }
 };
 
+//delete from list
+const deletePokemon = async (pokemonId, triggerReload) => {
+    //call on delete
+    try {
+        const response = await fetch(`/pokemon/${pokemonId}`, {
+            method: 'DELETE',
+        });
+
+        const result = await response.json();
+
+        //error handling
+        if (result.error) {
+            handleError(result.error);
+        } else {
+            triggerReload();
+        }
+    } catch (error) {
+        handleError('Error deleting');
+    }
+}
+
 module.exports = {
     handleError,
     hideError,
     sendPost,
+    deletePokemon,
 };

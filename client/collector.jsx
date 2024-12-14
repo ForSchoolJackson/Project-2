@@ -95,7 +95,7 @@ const PokemonList = (props) => {
             <div key={mon.id} className="pokemon">
                 <button
                     className="deletepokemonSubmit"
-                    onClick={() => helper.deletepokemon(mon._id, props.triggerReload)}>
+                    onClick={() => helper.deletePokemon(mon._id, props.triggerReload)}>
                     Delete
                 </button>
                 <div className="info">

@@ -13,13 +13,14 @@ const router = (app) => {
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 
-  // posts for login/signup
+  // posts for login/signup data
   app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
   app.post('/signup', mid.requiresSecure, mid.requiresLogout, controllers.Account.signup);
-  // logout
+
+  // get logout page
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
 
-  // main pages
+  // gt main pages
   app.get('/profile', mid.requiresLogin, middleLogger, controllers.Pokemon.profilePage);
   app.get('/search', mid.requiresLogin, middleLogger, controllers.Pokemon.searchPage);
 
@@ -28,11 +29,15 @@ const router = (app) => {
   app.get('/getProfile', mid.requiresLogin, controllers.Pokemon.getProfile);
   app.get('/passChange', mid.requiresLogin, controllers.Account.changePasswordPage);
 
+  // post for password change
   app.post('/passChange', mid.requiresSecure, mid.requiresLogin, controllers.Account.changePassword);
 
-  // get the pokemon data
+  // get the pokemon data for search
   app.get('/all-pokemon', controllers.Pokemon.getAllPokemon);
   app.get('/pokemon', controllers.Pokemon.getPokemonByName);
+
+  // post for adding pokemon data
+  app.post('/add-pokemon', mid.requiresSecure, mid.requiresLogin, controllers.Pokemon.addPokemon);
 
   // delete
   app.delete('/Pokemon/:id', mid.requiresLogin, controllers.Pokemon.deletePokemon);

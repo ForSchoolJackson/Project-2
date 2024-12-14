@@ -44,10 +44,15 @@ const getProfile = async (req, res) => {
 
 // add pokemon
 const addPokemon = async (req, res) => {
-  // chack all feilds
-  if (!req.body.height || !req.body.weight) {
-    return res.status(400).json({ error: 'Height and weight required!' });
+  // check if user logged in
+  if (!req.session.account || !req.session.account._id) {
+    return res.status(401).json({ error: 'Not the correct user' });
   }
+
+  // chack all feilds
+  // if (!req.body.height || !req.body.weight) {
+  //   return res.status(400).json({ error: 'Height and weight required!' });
+  // }
 
   const pokemonData = {
     num: req.body.num,
@@ -56,6 +61,7 @@ const addPokemon = async (req, res) => {
     type: req.body.type,
     height: req.body.height,
     weight: req.body.weight,
+    owner: req.session.account._id,
   };
 
   try {

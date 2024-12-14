@@ -89,10 +89,39 @@ const SearchPage = () => {
 };
 
 //add to list
-const handleAddToList = (pokemon) => {
-    
-    setUserPokemonList([...userPokemonList, pokemon]);
-    helper.handleError(`${pokemon.name} added to your list!`);
+const handleAddToList = async (pokemon) => {
+    try {
+        //data for send
+        const pokemonData = {
+            num: pokemon.num,
+            name: pokemon.name,
+            img: pokemon.img,
+            type: pokemon.type,
+            height: pokemon.height,
+            weight: pokemon.weight
+        };
+        //send request
+        const response = await fetch('/add-pokemon', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(pokemonData),
+        });
+
+        const result = await response.json();
+
+        //error handling
+        if (response.ok) {
+            helper.handleError(`${pokemon.name} added to your list!`);
+            console.log(result);
+        } else {
+            helper.handleError(result.error || 'Error adding Pokémon');
+        }
+    } catch (error) {
+        helper.handleError(`Problem adding ${pokemon.name} to your list.`);
+    }
+
 };
 
 //initialize
