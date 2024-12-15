@@ -45,6 +45,7 @@ const ChangePasswordWindow = () => {
     );
   };
 
+//initialize
 const init = () => {
     const root = createRoot(document.getElementById('app'));
     root.render(<ChangePasswordWindow />)

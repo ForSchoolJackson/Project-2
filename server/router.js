@@ -1,3 +1,4 @@
+// inports
 const controllers = require('./controllers');
 const mid = require('./middleware');
 
@@ -25,7 +26,7 @@ const router = (app) => {
   app.get('/myList', mid.requiresLogin, middleLogger, controllers.Pokemon.myListPage);
   app.get('/search', mid.requiresLogin, middleLogger, controllers.Pokemon.searchPage);
 
-  // get
+  // get for app pages
   app.get('/getPokemon', mid.requiresLogin, controllers.Pokemon.getPokemon);
   app.get('/getProfile', mid.requiresLogin, controllers.Pokemon.getProfile);
   app.get('/passChange', mid.requiresLogin, controllers.Account.changePasswordPage);

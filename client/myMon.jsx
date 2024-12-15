@@ -34,15 +34,18 @@ const PokemonList = (props) => {
         );
     };
 
+    //each pokemon card
     const pokemonNodes = pokemon.map(mon => {
         //for type array
         const types = Array.isArray(mon.type) ? mon.type.join(', ') : 'Unknown Type';
+
         return (
             <div key={mon.id} className="pokemon">
                 <div class="image">
                     <img src={mon.img} alt={mon.name} className="pokemonImg" />
                 </div>
                 <div class="text">
+                    <h3 className="pokemonName">{mon.nickname}</h3>
                     <h2 className="pokemonName">{mon.name}</h2>
                     <p className="pokemonType">{types}</p>
                     <p className="pokemonHeight">Height: {mon.height}</p>
@@ -64,6 +67,7 @@ const PokemonList = (props) => {
     );
 };
 
+//for the page
 const ListPage = () => {
     const [reloadPokemon, setReloadPokemon] = useState(false);
 
@@ -74,6 +78,7 @@ const ListPage = () => {
     );
 };
 
+//initialize
 const init = () => {
     const root = createRoot(document.getElementById('app'));
     root.render(<ListPage />)

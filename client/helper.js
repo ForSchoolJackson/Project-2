@@ -1,6 +1,3 @@
-// imports
-const { identity } = require("underscore");
-
 // handle the error msg
 const handleError = (message) => {
     document.getElementById('errorMessage').textContent = message;
@@ -28,11 +25,9 @@ const sendPost = async (url, data, handler) => {
     if (result.redirect) {
         window.location = result.redirect;
     }
-
     if (result.error) {
         handleError(result.error);
     }
-
     if (handler) {
         handler(result);
     }

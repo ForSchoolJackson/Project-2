@@ -4,9 +4,17 @@ const React = require('react');
 const { useState, useEffect } = React;
 const { createRoot } = require('react-dom/client');
 
+//for the search page
 const SearchPage = () => {
     const [pokemonList, setPokemonList] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    // for popup window
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedPokemon, setSelectedPokemon] = useState(null);
+    //for changes
+    const [inputName, setName] = useState('');
+    const [inputHeight, setHeight] = useState('');
+    const [inputWeight, setWeight] = useState('');
 
     useEffect(() => {
         // Fetch all Pokémon data when component mounts
@@ -27,6 +35,10 @@ const SearchPage = () => {
     const handleSearchByName = async (e) => {
         e.preventDefault();
         if (!searchQuery.trim()) {
+            //if none found fetch them all
+            const allResponse = await fetch('/all-pokemon');
+            const allData = await allResponse.json();
+            setPokemonList(allData);
             helper.handleError('Please enter a Pokemon name!');
             return;
         }
@@ -49,6 +61,59 @@ const SearchPage = () => {
         }
     };
 
+    //add button
+    const handleAddButton = (pokemon) => {
+        //current selected pokemon
+        setSelectedPokemon(pokemon)
+        //set defaults
+        setHeight(pokemon.height);
+        setWeight(pokemon.weight);
+        //open popup
+        setIsModalOpen(true);
+    };
+
+    //submit button
+    const handleAddToList = async () => {
+        if (!inputName.trim()) {
+            helper.handleError('Nickname needed!');
+            return;
+        }
+
+        const pokemonData = {
+            num: selectedPokemon.num,
+            name: selectedPokemon.name,
+            img: selectedPokemon.img,
+            type: selectedPokemon.type,
+            height: inputHeight,
+            weight: inputWeight,
+            nickname: inputName,
+        };
+
+        try {
+            const response = await fetch('/add-pokemon', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(pokemonData),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                setIsModalOpen(false);
+                setName('');
+                setHeight('');
+                setWeight('');
+            } else {
+                helper.handleError(result.error || 'Error adding Pokémon');
+            }
+        } catch (error) {
+            helper.handleError(`Problem adding ${selectedPokemon.name} to your list.`);
+        }
+    };
+
+
     //pokemon list
     const renderPokemonList = () => {
         if (pokemonList.length === 0) {
@@ -61,13 +126,14 @@ const SearchPage = () => {
                 <p>Type: {pokemon.type.join(', ')}</p>
                 <p>Height: {pokemon.height}</p>
                 <p>Weight: {pokemon.weight}</p>
-                <button onClick={() => handleAddToList(pokemon)}>
+                <button onClick={() => handleAddButton(pokemon)}>
                     Add
                 </button>
             </div>
         ));
     };
 
+    //search page and popoup
     return (
         <div className="search-container">
             <h2>Search Pokemon</h2>
@@ -84,45 +150,38 @@ const SearchPage = () => {
                 <h3><span id="errorMessage"></span></h3>
             </div>
             <div className="pokemon-list">{renderPokemonList()}</div>
+
+            {isModalOpen && (
+                <div className="modal open">
+                    <div className="modal-content">
+                        <h3>Enter a nickname for {selectedPokemon?.name}</h3>
+                        <input
+                            type="text"
+                            value={inputName}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Nickname"
+                        />
+                        <input
+                            type="text"
+                            value={inputHeight}
+                            onChange={(e) => setHeight(e.target.value)}
+                            placeholder={`${selectedPokemon?.height}`}
+                        />
+                        <input
+                            type="text"
+                            value={inputWeight}
+                            onChange={(e) => setWeight(e.target.value)}
+                            placeholder={`${selectedPokemon?.weight}`}
+                        />
+                        <button onClick={handleAddToList}>Confirm</button>
+                        <button onClick={() => setIsModalOpen(false)}>Cancel</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
 
-//add to list
-const handleAddToList = async (pokemon) => {
-    try {
-        //data for send
-        const pokemonData = {
-            num: pokemon.num,
-            name: pokemon.name,
-            img: pokemon.img,
-            type: pokemon.type,
-            height: pokemon.height,
-            weight: pokemon.weight
-        };
-        //send request
-        const response = await fetch('/add-pokemon', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(pokemonData),
-        });
-
-        const result = await response.json();
-
-        //error handling
-        if (response.ok) {
-            helper.handleError(`${pokemon.name} added to your list!`);
-            console.log(result);
-        } else {
-            helper.handleError(result.error || 'Error adding Pokémon');
-        }
-    } catch (error) {
-        helper.handleError(`Problem adding ${pokemon.name} to your list.`);
-    }
-
-};
 
 //initialize
 const init = () => {

@@ -1,4 +1,3 @@
-
 /*https://www.w3schools.com/bootstrap/bootstrap_ref_css_helpers.asp*/
 /* RESET*/
 * {
@@ -147,7 +146,6 @@ body {
 }
 
 #pokemon h2 {
-    margin-top: 2rem;
     color: #45a049;
     font-size: 1.2rem;
 }
@@ -157,7 +155,6 @@ body {
 }
 
 #pokemon h3 {
-    margin-top: 2rem;
     color: #45a049;
     font-size: 1.7rem;
 }

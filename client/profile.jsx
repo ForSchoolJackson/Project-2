@@ -60,6 +60,7 @@ const Profile = () => {
 
 };
 
+//for the profile page
 const ProfilePage = () => {
     const [reloadPokemon, setReloadPokemon] = useState(false);
 
@@ -70,6 +71,7 @@ const ProfilePage = () => {
     );
 };
 
+//initialize
 const init = () => {
     const root = createRoot(document.getElementById('app'));
     root.render(<ProfilePage />)

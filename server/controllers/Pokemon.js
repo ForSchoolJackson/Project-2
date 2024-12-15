@@ -7,6 +7,7 @@ const models = require('../models');
 const { ObjectId } = Types;
 const { Pokemon } = models;
 
+// for the json data
 const pokemonPath = path.resolve(__dirname, '../data/pokedex.json');
 const jsonString = fs.readFileSync(pokemonPath, 'utf-8');
 let data = [];
@@ -50,11 +51,6 @@ const addPokemon = async (req, res) => {
     return res.status(401).json({ error: 'Not the correct user' });
   }
 
-  // chack all feilds
-  // if (!req.body.height || !req.body.weight) {
-  //   return res.status(400).json({ error: 'Height and weight required!' });
-  // }
-
   const pokemonData = {
     num: req.body.num,
     name: req.body.name,
@@ -62,6 +58,7 @@ const addPokemon = async (req, res) => {
     type: req.body.type,
     height: req.body.height,
     weight: req.body.weight,
+    nickname: req.body.nickname,
     owner: req.session.account._id,
   };
 
@@ -78,6 +75,7 @@ const addPokemon = async (req, res) => {
       type: newPokemon.type,
       height: newPokemon.height,
       weight: newPokemon.weight,
+      nickname: newPokemon.nickname,
     });
   } catch (err) {
     console.log(err);
@@ -105,6 +103,7 @@ const getPokemon = async (req, res) => {
 const deletePokemon = async (req, res) => {
   const { id } = req.params;
 
+  // check
   if (!ObjectId.isValid(id)) {
     return res.status(400).json({ error: 'Invalid ID' });
   }
@@ -112,6 +111,7 @@ const deletePokemon = async (req, res) => {
   try {
     const deleted = await Pokemon.deleteOne({ _id: id });
 
+    // check
     if (deleted.deletedCount === 0) {
       return res.status(404).json({ error: 'No pokemon found!' });
     }
@@ -142,6 +142,7 @@ const getAllPokemon = (req, res) => {
 const getPokemonByName = async (req, res) => {
   const { name } = req.query;
 
+  // check
   if (!name) {
     return res.status(400).json({ error: 'No name provided to search.' });
   }

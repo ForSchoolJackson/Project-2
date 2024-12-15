@@ -4,6 +4,7 @@ const _ = require('underscore');
 
 const setHeight = (height) => _.escape(height).trim();
 const setWeight = (weight) => _.escape(weight).trim();
+const setnickname = (nickname) => _.escape(nickname).trim();
 
 // pokemon schema
 const PokemonSchema = new mongoose.Schema({
@@ -16,6 +17,12 @@ const PokemonSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
+  },
+  nickname: {
+    type: String,
+    required: false,
+    trim: true,
+    set: setnickname,
   },
   img: {
     type: String,
@@ -56,6 +63,7 @@ PokemonSchema.statics.toAPI = (doc) => ({
   type: doc.type,
   height: doc.height,
   weight: doc.weight,
+  nickname: doc.nickname,
 });
 
 // exports

@@ -11,6 +11,7 @@ const handleLogin = (e) => {
     const username = e.target.querySelector('#user').value;
     const pass = e.target.querySelector('#pass').value;
 
+    //check
     if (!username || !pass) {
         helper.handleError('Username or password is empty!');
         return false;
@@ -29,11 +30,11 @@ const handleSignup = (e) => {
     const pass = e.target.querySelector('#pass').value;
     const pass2 = e.target.querySelector('#pass2').value;
 
+    //checks
     if (!username || !pass || !pass2) {
         helper.handleError('All fields required!');
         return false;
     }
-
     if (pass !== pass2) {
         helper.handleError('Passwords do not match!');
         return false;
@@ -98,12 +99,14 @@ const init = () => {
 
     const root = createRoot(document.getElementById('content'));
 
+    //login
     loginButton.addEventListener('click', (e) => {
         e.preventDefault();
         root.render(<LoginWindow />);
         return false;
     });
 
+    //signup
     signupButton.addEventListener('click', (e) => {
         e.preventDefault();
         root.render(<SignupWindow />);

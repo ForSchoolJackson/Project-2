@@ -67,12 +67,12 @@ const signup = async (req, res) => {
   }
 };
 
-// Function to handle password change logic
+// password change
 const changePassword = async (req, res) => {
   const { currentPassword, newPassword } = req.body;
 
   try {
-    // Check if the current password is correct
+    // check if correct
     const account = await Account.findById(req.session.account._id);
     const isValidPassword = await account.comparePassword(currentPassword);
 
