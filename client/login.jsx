@@ -90,7 +90,7 @@ const SignupWindow = (props) => {
     );
 
 };
-  
+
 
 //initialize
 const init = () => {

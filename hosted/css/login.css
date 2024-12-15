@@ -150,12 +150,12 @@ form.mainForm input[type="submit"]:hover {
     font-size: 25vw;
 }
 
-.errpage p{
+.errpage p {
     margin-top: -30px;
 }
 
 /* 404 page image */
-.errpage img{
+.errpage img {
     height: 20vw;
 }
 
